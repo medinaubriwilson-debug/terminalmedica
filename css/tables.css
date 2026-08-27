@@ -1,0 +1,98 @@
+/* ========================================================
+   TERMINAL MÉDICA
+   TABLAS
+   ======================================================== */
+
+
+/* ========================================================
+   TABLA DE ADMISIÓN
+   ======================================================== */
+
+.admission-table th {
+    font-weight: 600;
+
+    padding: 14px 12px;
+}
+
+
+.admission-table td {
+    padding: 12px;
+}
+
+
+/* ========================================================
+   BOTÓN ELIMINAR
+   ======================================================== */
+
+.btn-delete {
+    background: transparent;
+
+    border: none;
+
+    color: #ef4444;
+
+    cursor: pointer;
+
+    padding: 6px 10px;
+
+    border-radius: 4px;
+
+    font-size: 0.9rem;
+}
+
+
+.btn-delete:hover {
+    background-color:
+        rgba(239, 68, 68, 0.1);
+}
+
+
+/* ========================================================
+   BOTÓN EDITAR
+   ======================================================== */
+
+.btn-edit {
+    background: transparent;
+
+    border: none;
+
+    color: var(--color-primary);
+
+    cursor: pointer;
+
+    padding: 6px 10px;
+
+    border-radius: 4px;
+
+    font-size: 0.9rem;
+}
+
+
+.btn-edit:hover {
+    background-color:
+        var(--color-primary-light);
+}
+
+
+/* ========================================================
+   ESTADO VACÍO
+   ======================================================== */
+
+.empty-state {
+    text-align: center;
+
+    padding: 100px 40px;
+
+    color: var(--text-muted);
+}
+
+
+.empty-state i {
+    font-size: 3rem;
+
+    margin-bottom: 16px;
+
+    color: var(--text-muted);
+
+    opacity: 0.4;
+}

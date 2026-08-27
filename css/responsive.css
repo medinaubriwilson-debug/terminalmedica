@@ -1,0 +1,56 @@
+/* ========================================================
+   TERMINAL MÉDICA
+   DISEÑO RESPONSIVE
+   ======================================================== */
+
+/*
+   Este archivo se utilizará para adaptar
+   la aplicación a:
+
+   - Computadoras pequeñas
+   - Tablets
+   - Teléfonos
+   - Pantallas verticales
+*/
+
+
+/* ========================================================
+   TABLETS
+   ======================================================== */
+
+@media (max-width: 1100px) {
+
+    /*
+       Las reglas responsive se agregarán
+       después de comprobar el diseño actual.
+    */
+
+}
+
+
+/* ========================================================
+   TELÉFONOS
+   ======================================================== */
+
+@media (max-width: 768px) {
+
+    /*
+       Las reglas responsive se agregarán
+       después de comprobar el diseño actual.
+    */
+
+}
+
+
+/* ========================================================
+   TELÉFONOS PEQUEÑOS
+   ======================================================== */
+
+@media (max-width: 480px) {
+
+    /*
+       Las reglas responsive se agregarán
+       después de comprobar el diseño actual.
+    */
+
+}

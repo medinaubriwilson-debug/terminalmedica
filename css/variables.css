@@ -1,0 +1,56 @@
+/* ========================================================
+   TERMINAL MÉDICA
+   VARIABLES DEL SISTEMA
+   ======================================================== */
+
+:root {
+    /* ==============================
+       MODO CLARO
+       ============================== */
+
+    --bg-app: #dde5ee;
+    --panel-bg: #fa0808;
+    --bg-white: #ffffff;
+    --sidebar-bg: #ffffff;
+    --sidebar-text: #0f172a;
+
+    --text-main: #0f172a;
+    --text-muted: #64748b;
+
+    --color-primary: #2563eb;
+    --color-primary-light: #eff6ff;
+
+    --border-subtle: #e2e8f0;
+
+    --radius-md: 12px;
+
+    --transition-smooth:
+        all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+
+/* ========================================================
+   MODO OSCURO
+   ======================================================== */
+
+[data-theme="dark"] {
+
+    --bg-app: #0f172a;
+
+    --bg-white: #1e293b;
+
+    --sidebar-bg: #1e293b;
+
+    --sidebar-text: #f8fafc;
+
+    --text-main: #f8fafc;
+
+    --text-muted: #94a3b8;
+
+    --color-primary: #3b82f6;
+
+    --color-primary-light:
+        rgba(59, 130, 246, 0.15);
+
+    --border-subtle: #334155;
+}

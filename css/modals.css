@@ -1,0 +1,70 @@
+/* ========================================================
+   TERMINAL MÉDICA
+   MODALES
+   ======================================================== */
+
+
+/* ========================================================
+   MODAL DE VISTA PREVIA DE EXPORTACIÓN
+   ======================================================== */
+
+#modal-export-preview {
+    display: none;
+
+    position: fixed;
+
+    inset: 0;
+
+    background:
+        rgba(2, 6, 23, 0.6);
+
+    z-index: 99999;
+
+    align-items: center;
+    justify-content: center;
+}
+
+
+/* ========================================================
+   TABLA DE LA VISTA PREVIA
+   ======================================================== */
+
+#modal-export-preview table {
+    width: 100%;
+
+    border-collapse: collapse;
+}
+
+
+/* ========================================================
+   ENCABEZADO DE LA TABLA
+   ======================================================== */
+
+#modal-export-preview thead {
+    background: var(--bg-app);
+
+    position: sticky;
+
+    top: 0;
+}
+
+
+/* ========================================================
+   CELDAS
+   ======================================================== */
+
+#modal-export-preview td,
+#modal-export-preview th {
+    padding: 8px;
+
+    text-align: left;
+}
+
+
+/* ========================================================
+   BOTÓN DE EXPORTACIÓN
+   ======================================================== */
+
+#modal-export-preview .btn-submit {
+    min-width: 160px;
+}

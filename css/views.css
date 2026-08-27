@@ -1,0 +1,29 @@
+/* ========================================================
+   TERMINAL MÉDICA
+   VISTAS Y TARJETAS
+   ======================================================== */
+
+.view-container {
+    padding: 24px;
+    height: calc(100% - 70px);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.content-view {
+    display: none;
+    height: 100%;
+}
+
+.content-view.active {
+    display: flex;
+    flex-direction: column;
+}
+
+.card {
+    background-color: var(--bg-white);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-md);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
