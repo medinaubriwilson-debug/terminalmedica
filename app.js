@@ -10,7 +10,9 @@ import {
     getDocs
 } from "https://www.gstatic.com/firebasejs/12.18.0/firebase-firestore.js";
 import {
-    cargarPerfilUsuario
+    import {
+    cargarPerfilUsuario,
+    obtenerUsuariosRegistrados
 } from "./js/usuarios/usuarios.js";
 
 document.addEventListener("DOMContentLoaded", () => {
