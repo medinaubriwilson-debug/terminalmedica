@@ -245,7 +245,48 @@ document.addEventListener("DOMContentLoaded", () => {
             if (profileMessage) profileMessage.textContent = 'No se pudo guardar el perfil. Intenta de nuevo.';
         }
     }
+async function cargarUsuariosRegistrados() {
+    try {
+        const usuarios = await obtenerUsuariosRegistrados();
 
+        const cuerpo = document.getElementById("registered-users-body");
+
+        if (!cuerpo) {
+            console.warn("No existe #registered-users-body");
+            return;
+        }
+
+        cuerpo.innerHTML = "";
+
+        if (usuarios.length === 0) {
+            cuerpo.innerHTML = `
+                <tr>
+                    <td colspan="5" style="text-align:center;padding:20px;">
+                        No hay usuarios registrados.
+                    </td>
+                </tr>
+            `;
+            return;
+        }
+
+        usuarios.forEach(usuario => {
+            const fila = document.createElement("tr");
+
+            fila.innerHTML = `
+                <td>${usuario.name || "Sin nombre"}</td>
+                <td>${usuario.email || "Sin correo"}</td>
+                <td>${usuario.phone || "Sin teléfono"}</td>
+                <td>${usuario.role || "Sin rol"}</td>
+                <td>${usuario.company || "Sin empresa"}</td>
+            `;
+
+            cuerpo.appendChild(fila);
+        });
+
+    } catch (error) {
+        console.error("Error cargando usuarios registrados:", error);
+    }
+}
     // ========================================================
     // 4. MÁSCARAS DE ENTRADA INTELIGENTES DE DATOS (DATA VALIDATION)
     // ========================================================
