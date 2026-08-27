@@ -217,74 +217,45 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
     async function guardarPerfilUsuario(uid) {
-        if (!uid) return;
-        if (profileMessage) profileMessage.textContent = '';
-        try {
-            await setDoc(doc(db, "usuarios", uid), {
+    if (!uid) return;
+
+    if (profileMessage) {
+        profileMessage.textContent = '';
+    }
+
+    try {
+        await setDoc(
+            doc(db, "usuarios", uid),
+            {
                 name: profileName?.value.trim() || "",
                 email: profileEmail?.value.trim() || "",
                 phone: profilePhone?.value.trim() || "",
                 role: profileRole?.value.trim() || "",
                 company: profileCompany?.value.trim() || ""
-            }, { merge: true });
-           await cargarPerfilUsuario({
-    uid: user.uid,
-    signupName,
-    signupPhone,
-    signupRole,
-    signupCompany,
-    profileName,
-    profileEmail,
-    profilePhone,
-    profileRole,
-    profileCompany,
-    profileMessage
-});
-        } catch (error) {
-            console.error('Error guardando perfil de usuario:', error);
-            if (profileMessage) profileMessage.textContent = 'No se pudo guardar el perfil. Intenta de nuevo.';
-        }
-    }
-async function cargarUsuariosRegistrados() {
-    try {
-        const usuarios = await obtenerUsuariosRegistrados();
+            },
+            { merge: true }
+        );
 
-        const cuerpo = document.getElementById("registered-users-body");
+        const usuarioActual = auth.currentUser;
 
-        if (!cuerpo) {
-            console.warn("No existe #registered-users-body");
-            return;
+        if (usuarioActual) {
+            await cargarPerfilUsuario(usuarioActual);
         }
 
-        cuerpo.innerHTML = "";
-
-        if (usuarios.length === 0) {
-            cuerpo.innerHTML = `
-                <tr>
-                    <td colspan="5" style="text-align:center;padding:20px;">
-                        No hay usuarios registrados.
-                    </td>
-                </tr>
-            `;
-            return;
+        if (profileMessage) {
+            profileMessage.textContent = "Perfil guardado correctamente.";
         }
-
-        usuarios.forEach(usuario => {
-            const fila = document.createElement("tr");
-
-            fila.innerHTML = `
-                <td>${usuario.name || "Sin nombre"}</td>
-                <td>${usuario.email || "Sin correo"}</td>
-                <td>${usuario.phone || "Sin teléfono"}</td>
-                <td>${usuario.role || "Sin rol"}</td>
-                <td>${usuario.company || "Sin empresa"}</td>
-            `;
-
-            cuerpo.appendChild(fila);
-        });
 
     } catch (error) {
-        console.error("Error cargando usuarios registrados:", error);
+        console.error(
+            "Error guardando perfil de usuario:",
+            error
+        );
+
+        if (profileMessage) {
+            profileMessage.textContent =
+                "No se pudo guardar el perfil. Intenta de nuevo.";
+        }
     }
 }
     // ========================================================
