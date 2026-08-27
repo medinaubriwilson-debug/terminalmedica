@@ -9,19 +9,75 @@ import {
 } from "https://www.gstatic.com/firebasejs/12.18.0/firebase-firestore.js";
 
 
-export async function cargarPerfilUsuario({
-    uid,
-    signupName,
-    signupPhone,
-    signupRole,
-    signupCompany,
-    profileName,
-    profileEmail,
-    profilePhone,
-    profileRole,
-    profileCompany,
-    profileMessage
-}) {
+export async function cargarPerfilUsuario(user) {
+    if (!user) return null;
+
+    try {
+        const ref = doc(db, "usuarios", user.uid);
+        const snap = await getDoc(ref);
+
+        if (!snap.exists()) {
+            console.warn("No existe perfil para el usuario:", user.uid);
+            return null;
+        }
+
+        const perfil = snap.data();
+
+        // Actualizar nombre
+        const currentName = document.getElementById("current-name");
+        if (currentName) {
+            currentName.textContent = perfil.name || "Usuario";
+        }
+
+        // Actualizar correo
+        const currentEmail = document.getElementById("current-email");
+        if (currentEmail) {
+            currentEmail.textContent = perfil.email || user.email || "";
+        }
+
+        // Actualizar rol
+        const currentRole = document.querySelector("#current-user .role");
+        if (currentRole) {
+            currentRole.textContent = perfil.role || "Sin rol";
+        }
+
+        // Actualizar nombre del perfil
+        const profileName = document.getElementById("profile-name");
+        if (profileName) {
+            profileName.value = perfil.name || "";
+        }
+
+        // Actualizar correo del perfil
+        const profileEmail = document.getElementById("profile-email");
+        if (profileEmail) {
+            profileEmail.value = perfil.email || user.email || "";
+        }
+
+        // Actualizar teléfono
+        const profilePhone = document.getElementById("profile-phone");
+        if (profilePhone) {
+            profilePhone.value = perfil.phone || "";
+        }
+
+        // Actualizar rol
+        const profileRole = document.getElementById("profile-role");
+        if (profileRole) {
+            profileRole.value = perfil.role || "";
+        }
+
+        // Actualizar empresa
+        const profileCompany = document.getElementById("profile-company");
+        if (profileCompany) {
+            profileCompany.value = perfil.company || "";
+        }
+
+        return perfil;
+
+    } catch (error) {
+        console.error("Error cargando perfil:", error);
+        return null;
+    }
+} {
     if (!uid) return;
 
     try {
