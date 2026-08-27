@@ -512,51 +512,45 @@ observarSesion(async (user) => {
     // Mostrar panel de cuentas (usuarios registrados)
 async function fetchRegisteredUsers() {
     try {
-        const usuariosCol = collection(db, "usuarios");
-        const qSnap = await getDocs(usuariosCol);
+        const usuarios = await obtenerUsuariosRegistrados();
 
-        const users = [];
+        console.log("Usuarios encontrados:", usuarios);
 
-        qSnap.forEach(docItem => {
-            const usuario = docItem.data();
+        if (!registeredUsersBody) {
+            console.warn("No existe #registered-users-body");
+        } else {
+            registeredUsersBody.innerHTML = "";
 
-            users.push({
-                ...usuario,
-                _id: docItem.id
-            });
-        });
-
-        console.log("Usuarios encontrados:", users);
-
-        if (users.length === 0) {
-            if (currentNameEl) {
-                currentNameEl.textContent = "No hay usuarios registrados";
-            }
-
-            if (currentEmailEl) {
-                currentEmailEl.textContent = "";
-            }
-
-            if (otherAccounts) {
-                otherAccounts.innerHTML = `
-                    <div style="
-                        padding:14px;
-                        text-align:center;
-                        color:var(--text-muted);
-                    ">
-                        No hay cuentas registradas.
-                    </div>
+            if (usuarios.length === 0) {
+                registeredUsersBody.innerHTML = `
+                    <tr>
+                        <td colspan="5" style="text-align:center; padding:20px;">
+                            No hay usuarios registrados.
+                        </td>
+                    </tr>
                 `;
-            }
+            } else {
+                usuarios.forEach(usuario => {
+                    const fila = document.createElement("tr");
 
-            return;
+                    fila.innerHTML = `
+                        <td>${usuario.name || "Sin nombre"}</td>
+                        <td>${usuario.email || "Sin correo"}</td>
+                        <td>${usuario.phone || "Sin teléfono"}</td>
+                        <td>${usuario.role || "Sin rol"}</td>
+                        <td>${usuario.company || "Sin empresa"}</td>
+                    `;
+
+                    registeredUsersBody.appendChild(fila);
+                });
+            }
         }
 
-        // Mostrar cuentas
+        // También actualizamos la lista de cuentas
         if (otherAccounts) {
             otherAccounts.innerHTML = "";
 
-            users.forEach(usuario => {
+            usuarios.forEach(usuario => {
                 const item = document.createElement("div");
 
                 const iniciales = (
@@ -612,37 +606,22 @@ async function fetchRegisteredUsers() {
                     </div>
                 `;
 
-                item.addEventListener("click", () => {
-                    if (loginEmail) {
-                        loginEmail.value = usuario.email || "";
-                    }
-
-                    if (loginPassword) {
-                        loginPassword.value = "";
-                    }
-
-                    if (formLogin) {
-                        formLogin.style.display = "flex";
-                    }
-
-                    if (formSignup) {
-                        formSignup.style.display = "none";
-                    }
-
-                    if (modalRegisteredUsers) {
-                        modalRegisteredUsers.style.display = "none";
-                    }
-                });
-
                 otherAccounts.appendChild(item);
             });
         }
 
     } catch (error) {
-        console.error(
-            "Error cargando usuarios registrados:",
-            error
-        );
+        console.error("Error cargando usuarios registrados:", error);
+
+        if (registeredUsersBody) {
+            registeredUsersBody.innerHTML = `
+                <tr>
+                    <td colspan="5" style="text-align:center; padding:20px;">
+                        Error al cargar los usuarios registrados.
+                    </td>
+                </tr>
+            `;
+        }
     }
 }
     if (showRegisteredUsers) {
