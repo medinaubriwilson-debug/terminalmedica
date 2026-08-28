@@ -453,26 +453,92 @@ document.addEventListener("DOMContentLoaded", () => {
 let detenerObservacionPacientes = null;
 
 observarSesion(async (user) => {
-    const appContainer = document.querySelector('.app-container');
+    const appContainer =
+        document.querySelector('.app-container');
 
     if (user) {
-        if (loginScreen) loginScreen.style.display = 'none';
-        if (appContainer) appContainer.style.display = 'flex';
+        if (loginScreen)
+            loginScreen.style.display = 'none';
 
-        await cargarPerfilUsuario(user.uid);
+        if (appContainer)
+            appContainer.style.display = 'flex';
+
+        const perfil =
+            await cargarPerfilUsuario(user);
+
+        if (perfil) {
+            if (currentNameEl) {
+                currentNameEl.textContent =
+                    perfil.name || "Usuario";
+            }
+
+            if (currentEmailEl) {
+                currentEmailEl.textContent =
+                    perfil.email || user.email || "";
+            }
+
+            if (currentAvatar) {
+                const nombre =
+                    perfil.name ||
+                    perfil.email ||
+                    "U";
+
+                const iniciales = nombre
+                    .split(" ")
+                    .filter(Boolean)
+                    .map(parte => parte[0])
+                    .join("")
+                    .slice(0, 2)
+                    .toUpperCase();
+
+                currentAvatar.textContent = iniciales;
+            }
+
+            const headerName =
+                document.querySelector(
+                    ".user-profile .user-info .name"
+                );
+
+            const headerRole =
+                document.querySelector(
+                    ".user-profile .user-info .role"
+                );
+
+            const headerAvatar =
+                document.querySelector(
+                    ".user-profile .avatar"
+                );
+
+            if (headerName) {
+                headerName.textContent =
+                    perfil.name || "Usuario";
+            }
+
+            if (headerRole) {
+                headerRole.textContent =
+                    perfil.role || "Sin rol";
+            }
+
+            if (headerAvatar) {
+                headerAvatar.textContent =
+                    currentAvatar?.textContent || "U";
+            }
+        }
 
         activarVista('panel');
 
-        // Iniciar Firestore solamente cuando el usuario esté autenticado
-        detenerObservacionPacientes = observarPacientes(dibujarPacientes);
+        detenerObservacionPacientes =
+            observarPacientes(dibujarPacientes);
 
     } else {
-        if (loginScreen) loginScreen.style.display = 'flex';
-        if (appContainer) appContainer.style.display = 'none';
+        if (loginScreen)
+            loginScreen.style.display = 'flex';
+
+        if (appContainer)
+            appContainer.style.display = 'none';
 
         activarVista('panel');
 
-        // Detener la escucha cuando se cierra la sesión
         if (detenerObservacionPacientes) {
             detenerObservacionPacientes();
             detenerObservacionPacientes = null;
