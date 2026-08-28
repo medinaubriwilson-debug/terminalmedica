@@ -467,9 +467,21 @@ observarSesion(async (user) => {
             await cargarPerfilUsuario(user);
 
         if (perfil) {
-            if (currentNameEl) {
-                currentNameEl.textContent =
-                    perfil.name || "Usuario";
+           const currentUserName =
+    document.getElementById("current-user-name");
+
+const currentUserRole =
+    document.getElementById("current-user-role");
+
+if (currentUserName) {
+    currentUserName.textContent =
+        perfil.name || "Usuario";
+}
+
+if (currentUserRole) {
+    currentUserRole.textContent =
+        perfil.role || "Sin rol";
+}
             }
 
             if (currentEmailEl) {
