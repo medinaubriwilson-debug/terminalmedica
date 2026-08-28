@@ -252,11 +252,25 @@
                                 <h3 style="margin:0; font-size:1.2rem; font-weight:700;"><i class="fa-solid fa-user-shield"></i> Perfil de Usuario</h3>
                                 <p style="margin:8px 0 0; color:var(--text-muted); max-width:620px;">Aquí puedes ver y actualizar tus datos de acceso, rol y empresa.</p>
                             </div>
-                            <div style="min-width:220px; padding:16px; background:var(--bg-app); border-radius:12px;">
-                                <strong style="display:block; margin-bottom:8px;">Usuario actual</strong>
-                                <span class="name" style="display:block; font-weight:600;">Director Médico</span>
-                                <span class="role" style="display:block; color:var(--text-muted);">Administrador</span>
-                            </div>
+                          <div style="min-width:220px; padding:16px; background:var(--bg-app); border-radius:12px;">
+    <strong style="display:block; margin-bottom:8px;">Usuario actual</strong>
+
+    <span
+        id="current-user-name"
+        class="name"
+        style="display:block; font-weight:600;"
+    >
+        Usuario
+    </span>
+
+    <span
+        id="current-user-role"
+        class="role"
+        style="display:block; color:var(--text-muted);"
+    >
+        Sin rol
+    </span>
+</div>
                         </div>
                         <form id="form-user-profile" style="display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:16px;">
                             <div class="form-group">
